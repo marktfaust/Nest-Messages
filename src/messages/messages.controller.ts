@@ -11,13 +11,7 @@ import { MessagesService } from './messages.service';
 
 @Controller('messages')
 export class MessagesController {
-  messagesService: MessagesService;
-
-  constructor() {
-    // DO NOT DO THIS IN REAL APPS BECAUSE SERVICE IS CREATING ITS OWN DEPENDENCY
-    // (USE DEPENDENCY INJECTION INSTEAD)
-    this.messagesService = new MessagesService();
-  }
+  constructor(public messagesService: MessagesService) {}
 
   @Get()
   listMessages() {
@@ -36,5 +30,7 @@ export class MessagesController {
     if (!message) {
       throw new NotFoundException('message not found');
     }
+
+    return message;
   }
 }
